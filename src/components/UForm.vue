@@ -104,10 +104,10 @@ export default {
     data() {
       return {
         msg:'s',
-        Longitude:0.00,
-        Latitude:0.00,
-        locName:'India',
-        description:'beauty',
+        Longitude:0,
+        Latitude:0,
+        locName:'',
+        description:'',
         
 
       };

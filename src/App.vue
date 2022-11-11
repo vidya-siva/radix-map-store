@@ -47,7 +47,10 @@ export default {
       
       this.$store.state.activeMap.isActive= false
       console.log(this.$store.state.count)
-
+      this.$store.state.Lat = 0
+      this.$store.state.Lon = 0
+      this.$store.state.locN = ''
+      this.$store.state.des = ''
       },
 
       },

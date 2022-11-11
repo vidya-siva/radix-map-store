@@ -7,8 +7,8 @@ const state = {
   count: 0,
   Lat:0.00,
   Lon:0.00,
-  locN:'India',
-  des:'beauty',
+  locN:'',
+  des:'',
   activeMap:{
     isActive: false
   }
