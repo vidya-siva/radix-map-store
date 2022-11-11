@@ -103,7 +103,6 @@ export default {
     },
     watch: {
       lati : {handler : function()  {
-        console.log('render')
         this.center = latLng(this.$store.state.Lat,this.$store.state.Lon)
         this.circle.center = this.center
         this.coordArray = [{id:1,lat:this.$store.state.Lat,long:this.$store.state.Lon ,name:'Eskişehir'}]
@@ -116,7 +115,6 @@ export default {
         this.$store.state.count = this.coordArray.length
 		}},
     windowData : {handler : function()  {
-        console.log('render')
         this.center = latLng(this.$store.state.Lat,this.$store.state.Lon)
         this.circle.center = this.center
         this.coordArray = [{id:1,lat:this.$store.state.Lat,long:this.$store.state.Lon ,name:'Eskişehir'}]

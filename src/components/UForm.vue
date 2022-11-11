@@ -90,7 +90,7 @@ export default {
     methods:{
 
       submitFunction(){
-      console.log('yaaa')
+        console.log('submitted')
       this.$store.state.Lat = this.Latitude
       this.$store.state.Lon = this.Longitude
       this.$store.state.locN = this.locName
