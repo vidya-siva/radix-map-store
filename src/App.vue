@@ -1,18 +1,56 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    
+    <!-- <HelloH /> -->
+    
+    <div v-show="!windowData">
+
+    <UForm />
+    </div>
+    <div v-show="windowData">
+      <div class="row d-flex justify-content-center">
+      
+      <div class="col-md-3 "> <button class="btn btn-dark w-100" type="button" style="width: auto; margin: 0.5rem;" @click="submitFunction()">Check other placess </button></div>  
+      </div>
+      <LeMap /> 
+    
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import LeMap from './components/LeMap.vue'
+import UForm from './components/UForm.vue'
+// import HelloH from './components/Hello'
+import { mapGetters } from 'vuex'
+
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
-  }
+    LeMap,
+    UForm,
+    // HelloH
+  }, 
+  computed: mapGetters([
+      'evenOrOdd','lati','long','windowData'
+    ]),
+    watch: {
+      lati : {handler : function()  {
+        console.log('rendessssssssssr')
+        this.$forceUpdate()
+        
+		}}},
+    methods:{
+
+      submitFunction(){
+      
+      this.$store.state.activeMap.isActive= false
+      console.log(this.$store.state.count)
+
+      },
+
+      },
 }
 </script>
 
