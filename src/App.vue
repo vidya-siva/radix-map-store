@@ -1,7 +1,6 @@
 <template>
   <div id="app">
     
-    <!-- <HelloH /> -->
     
     <div v-show="!windowData">
 
@@ -21,7 +20,6 @@
 <script>
 import LeMap from './components/LeMap.vue'
 import UForm from './components/UForm.vue'
-// import HelloH from './components/Hello'
 import { mapGetters } from 'vuex'
 
 
@@ -37,7 +35,6 @@ export default {
     ]),
     watch: {
       lati : {handler : function()  {
-        console.log('rendessssssssssr')
         this.$forceUpdate()
         
 		}}},
@@ -46,7 +43,7 @@ export default {
       submitFunction(){
       
       this.$store.state.activeMap.isActive= false
-      console.log(this.$store.state.count)
+      // console.log(this.$store.state.count)
       this.$store.state.Lat = 0
       this.$store.state.Lon = 0
       this.$store.state.locN = ''

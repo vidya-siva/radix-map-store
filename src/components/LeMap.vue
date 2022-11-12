@@ -41,9 +41,9 @@
 <script>
 import { latLng ,Icon} from "leaflet";
 import { LMap, LTileLayer, LMarker, LPopup} from "vue2-leaflet";
-import markerimage from './marketimage.png'
 import { mapGetters } from 'vuex'
-
+import { GeoSearchControl, OpenStreetMapProvider } from 'leaflet-geosearch';
+import $ from 'jquery'
 
 delete Icon.Default.prototype._getIconUrl;
 Icon.Default.mergeOptions({
@@ -83,8 +83,25 @@ export default {
     onCustomClick(item){
       const {latlng}=item;
       console.log(latlng)
-    }
+    },
+    mainfunc(){
+      if(this.$store.state.count == 0){
+
+       this.map.addControl( GeoSearchControl({
+            provider: new OpenStreetMapProvider(),
+            style: 'bar',
+            searchLabel: 'Enter', // optional: string      - default 'Enter address'
+            autoComplete: true,
+            
+          }));
+          $('div.geosearch.leaflet-bar.leaflet-control.leaflet-control-geosearch.leaflet-geosearch-bar').hide(true)
+        }
+
+      },
   },
+  // mounted(){
+  //   this.mainfunc()
+  // },
     data() {
       return {
         zoom: 12,
@@ -92,7 +109,7 @@ export default {
         url: 'https://tile.thunderforest.com/cycle/{z}/{x}/{y}.png?apikey=b90e089c365242a3a08dbb49a7084a61',
         attribution: 'Haritamız',
         coordArray:[{}],
-        icon:markerimage,
+        
         iconSize:[40,40],
         circle:{
           center: latLng(this.$store.state.Lat,this.$store.state.Lon),
@@ -111,8 +128,15 @@ export default {
         // }
         this.$forceUpdate()
         this.map = this.$refs.myMap.mapObject
+        if(this.$store.state.count == 0){
+          this.mainfunc()
+        }
+        
+
+        
         this.map.invalidateSize(false)
-        this.$store.state.count = this.coordArray.length
+        this.$store.state.count = 4
+        // $('div.geosearch.leaflet-bar.leaflet-control.leaflet-control-geosearch.leaflet-geosearch-bar').style.display='none'
 		}},
     windowData : {handler : function()  {
         this.center = latLng(this.$store.state.Lat,this.$store.state.Lon)
@@ -124,7 +148,7 @@ export default {
         this.$forceUpdate()
         this.map = this.$refs.myMap.mapObject
         this.map.invalidateSize(false)
-        this.$store.state.count = this.coordArray.length
+        // this.$store.state.count = this.coordArray.length
 		}}
 
 		
@@ -141,5 +165,25 @@ export default {
   color: #2c3e50;
   margin-top: 60px;
 }
-</style>
+.leaflet-geosearch-bar {
+    position: relative;
+    display: block;
+    height: auto;
+    width: 400px;
+    max-width: calc(100% - 120px);
+    margin: 10px auto 0;
+    cursor: auto;
+    z-index: 1000;
+}
+.leaflet-control-geosearch .results>* {
+    line-height: 24px;
+    padding: 0 8px;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    background-color: white
+}
 
+
+</style>
