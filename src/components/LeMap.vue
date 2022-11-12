@@ -19,7 +19,7 @@
             :url="url"
             :attribution="attribution"
         />
-        <l-marker :draggable="false" @update:latLng="onDrag"  @click="onLogMarker(item)" :lat-lng="getCoord(item.lat,item.long)" v-for="item in coordArray" :key="item.id">
+        <l-marker  :draggable="false" @update:latLng="onDrag"  @click="onLogMarker(item)" :lat-lng="getCoord(item.lat,item.long)" v-for="item in coordArray" :key="item.id">
           <!-- <l-icon :icon-url="icon" :icon-size="iconSize" /> -->
           <l-popup>
             Location Name : {{ $store.state.locN }}
@@ -132,7 +132,7 @@ export default {
 }
 </script>
 
-<!-- <style>
+<style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -141,5 +141,5 @@ export default {
   color: #2c3e50;
   margin-top: 60px;
 }
-</style> -->
+</style>
 

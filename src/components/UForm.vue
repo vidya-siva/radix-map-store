@@ -87,6 +87,9 @@ export default {
     },
     
     },
+    mounted(){
+      this.mainFunc()
+    },
     methods:{
 
       submitFunction(){
@@ -98,7 +101,19 @@ export default {
       this.$store.state.activeMap.isActive= true
 
 
-    },
+    },mainFunc(){
+      
+
+        navigator.geolocation.getCurrentPosition(res => {
+          this.Latitude = res.coords.latitude
+          this.Longitude = res.coords.longitude
+          // this.center = {
+          //   lat: res.coords.latitude,
+          //   lng: res.coords.longitude
+          // };
+        });
+      
+    }
     
     },
     data() {
