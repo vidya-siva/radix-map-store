@@ -11,7 +11,8 @@ const state = {
   des:'',
   activeMap:{
     isActive: false
-  }
+  },
+  version:'v.0.0.3'
   // center: latLng(39.903416, 32.858900),
   
 }

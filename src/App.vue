@@ -14,6 +14,7 @@
       <LeMap /> 
     
     </div>
+    <footer> {{this.$store.state.version}} </footer>
   </div>
 </template>
 
@@ -62,5 +63,10 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+footer{
+height: 50px;
+width: 100%;
+position: relative;
 }
 </style>
