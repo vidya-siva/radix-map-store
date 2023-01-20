@@ -187,7 +187,7 @@ export default {
                           this.status =  num.toString()+ ' more hours to go' 
                         }
                         else if (parseInt(today.getHours())  ==  '23'){
-                          if (parseInt(today.getMinutes()) < 59){
+                          if (parseInt(today.getMinutes()) < 60){
 
                             let min = 60 - today.getMinutes() 
                             this.status = 'Wait for '+ min.toString()+ 'minutes to go'
