@@ -204,8 +204,8 @@ export default {
 		// }},
     timerCount: {
                 handler(value) {
-                    console.log(value)
-                    console.log(this.curdate)
+                    if(!value){return}
+                    // console.log(this.curdate)
                     // if (value > 0) {
                       const today = new Date();
                       const date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
@@ -266,63 +266,63 @@ export default {
                       }
                       if(this.showwish){
 
-                      if(this.text.length <= this.dtext['text'].length){
+                      if(this.text.length != this.dtext['text'].length){
                         
-                        this.text = this.text+this.dtext['text'].split(" ")[this.cnt] + " "
+                        this.text = this.text+this.dtext['text'].split("")[this.cnt]
                         this.cnt = this.cnt + 1
                         if(this.text.length >= this.dtext['text'].length){
                           this.cnt = 0
                         }
-                      }else if(this.text2.length <= this.dtext['text2'].length){
-                        this.text2 = this.text2+this.dtext['text2'].split(" ")[this.cnt] + " "
+                      }else if(this.text2.length != this.dtext['text2'].length){
+                        this.text2 = this.text2+this.dtext['text2'].split("")[this.cnt]
                         this.cnt = this.cnt + 1
                         if(this.text2.length >= this.dtext['text2'].length){
                           this.cnt = 0
                         }
-                      }else if(this.text3.length <= this.dtext['text3'].length){
-                        this.text3 = this.text3+this.dtext['text3'].split(" ")[this.cnt] + " "
+                      }else if(this.text3.length != this.dtext['text3'].length){
+                        this.text3 = this.text3+this.dtext['text3'].split("")[this.cnt]
                         this.cnt = this.cnt + 1
                         if(this.text3.length >= this.dtext['text3'].length){
                           this.cnt = 0
                         }
-                      }else if(this.text4.length <= this.dtext['text4'].length){
-                        this.text4 = this.text4+this.dtext['text4'].split(" ")[this.cnt] + " "
+                      }else if(this.text4.length != this.dtext['text4'].length){
+                        this.text4 = this.text4+this.dtext['text4'].split("")[this.cnt]
                         this.cnt = this.cnt + 1
                         if(this.text4.length >= this.dtext['text4'].length){
                           this.cnt = 0
                         }
-                      }else if(this.text5.length <= this.dtext['text5'].length){
-                        this.text5 = this.text5+this.dtext['text5'].split(" ")[this.cnt] + " "
+                      }else if(this.text5.length != this.dtext['text5'].length){
+                        this.text5 = this.text5+this.dtext['text5'].split("")[this.cnt]
                         this.cnt = this.cnt + 1
                         if(this.text5.length >= this.dtext['text5'].length){
                           this.cnt = 0
                         }
-                      }else if(this.text6.length <= this.dtext['text6'].length){
-                        this.text6 = this.text6+this.dtext['text6'].split(" ")[this.cnt] + " "
+                      }else if(this.text6.length != this.dtext['text6'].length){
+                        this.text6 = this.text6+this.dtext['text6'].split("")[this.cnt]
                         this.cnt = this.cnt + 1
                         if(this.text6.length >= this.dtext['text6'].length){
                           this.cnt = 0
                         }
-                      }else if(this.text7.length <= this.dtext['text7'].length){
-                        this.text7 = this.text7+this.dtext['text7'].split(" ")[this.cnt] + " "
+                      }else if(this.text7.length != this.dtext['text7'].length){
+                        this.text7 = this.text7+this.dtext['text7'].split("")[this.cnt]
                         this.cnt = this.cnt + 1
                         if(this.text7.length >= this.dtext['text7'].length){
                           this.cnt = 0
                         }
-                      }else if(this.text8.length <= this.dtext['text8'].length){
-                        this.text8 = this.text8+this.dtext['text8'].split(" ")[this.cnt] + " "
+                      }else if(this.text8.length != this.dtext['text8'].length){
+                        this.text8 = this.text8+this.dtext['text8'].split("")[this.cnt]
                         this.cnt = this.cnt + 1
                         if(this.text8.length >= this.dtext['text8'].length){
                           this.cnt = 0
                         }
-                      }else if(this.text9.length <= this.dtext['text9'].length){
-                        this.text9 = this.text9+this.dtext['text9'].split(" ")[this.cnt] + " "
+                      }else if(this.text9.length != this.dtext['text9'].length){
+                        this.text9 = this.text9+this.dtext['text9'].split("")[this.cnt]
                         this.cnt = this.cnt + 1
                         if(this.text9.length >= this.dtext['text9'].length){
                           this.cnt = 0
                         }
-                      }else if(this.text10.length <= this.dtext['text10'].length){
-                        this.text10 = this.text10+this.dtext['text10'].split(" ")[this.cnt] + " "
+                      }else if(this.text10.length != this.dtext['text10'].length){
+                        this.text10 = this.text10+this.dtext['text10'].split("")[this.cnt]
                         this.cnt = this.cnt + 1
                         if(this.text10.length >= this.dtext['text10'].length){
                           this.cnt = 0
@@ -340,7 +340,7 @@ export default {
                         setTimeout(() => {
                             this.timerCount--;
                             this.curdate = dateTime;
-                        }, 500);
+                        }, 20);
                     // }
 
                 },
