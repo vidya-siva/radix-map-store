@@ -211,7 +211,6 @@ export default {
                       const date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
                       const time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
                       const dateTime = date +' '+ time;
-                      console.log(dateTime)
                       if (date =='2023-1-20' ){
 
                         if (parseInt(today.getHours())  <  23){
@@ -263,10 +262,10 @@ export default {
                         this.text8 = ""
                         this.text9 = ""
                         this.text10 = ""
-                        console.log('length',this.dtext['text2'].split(" ").length)
                         
                       }
-                      console.log('cnt',this.cnt,this.text.length,this.dtext['text'].length)
+                      if(this.showwish){
+
                       if(this.text.length <= this.dtext['text'].length){
                         
                         this.text = this.text+this.dtext['text'].split(" ")[this.cnt] + " "
@@ -275,7 +274,6 @@ export default {
                           this.cnt = 0
                         }
                       }else if(this.text2.length <= this.dtext['text2'].length){
-                        console.log(this.dtext['text2'].split(" ")[this.cnt],this.dtext['text2'].split(" "),this.cnt)
                         this.text2 = this.text2+this.dtext['text2'].split(" ")[this.cnt] + " "
                         this.cnt = this.cnt + 1
                         if(this.text2.length >= this.dtext['text2'].length){
@@ -330,6 +328,7 @@ export default {
                           this.cnt = 0
                         }
                       }
+                    }
 
 
                       // if(this.timerCount<20 && this.timerCount>10){
