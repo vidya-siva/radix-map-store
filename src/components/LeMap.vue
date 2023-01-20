@@ -40,6 +40,14 @@
         <h1 v-if="show2">{{ show2stats }}</h1>
       <!-- <div class="col-md-3 "> <button class="btn btn-dark w-100" type="button" style="width: auto; margin: 0.5rem;" @click="submitFunction()">Check other placess </button></div>   -->
       </div>
+      <div v-if="showwish" >
+        <a >Hey bossss! </a>
+    <br>
+    <a >You have turned 27! </a>
+    <br>
+    <a>En life la you are veryy important, You are such a sweet and an adodarable person anyone would ask for. such a genuine soul </a>
+    
+      </div>
     </div>
   </div>
 </template>
@@ -175,7 +183,7 @@ export default {
                       if (date =='2023-1-20'){
 
                         if (parseInt(today.getHours())  <  23){
-                          let num = 23 - today.getHours() 
+                          let num = 24 - today.getHours() 
                           this.status =  num.toString()+ ' more hours to go' 
                         }
                         else if (parseInt(today.getHours())  ==  '23'){
