@@ -218,7 +218,7 @@ export default {
                         }
                       }else if (date =='2023-1-21'){
                         // this.status = 'Happy Birthday Boss'
-                        // this.showstatus = false
+                        this.showstatus = false
                         this.showwish = true
                       }
                       // if(this.showwish){
