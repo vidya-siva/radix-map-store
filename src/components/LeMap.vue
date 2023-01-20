@@ -144,7 +144,8 @@ export default {
         showwish:false,
         showstatus:true,
         show2:false,
-        show2stats:''
+        show2stats:'',
+        timerCount:10
         
       };
     },
@@ -215,6 +216,10 @@ export default {
                             }
                           }
                         }
+                      }else if (date =='2023-1-21'){
+                        // this.status = 'Happy Birthday Boss'
+                        // this.showstatus = false
+                        this.showwish = true
                       }
                       // if(this.showwish){
 
