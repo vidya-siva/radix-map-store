@@ -40,24 +40,27 @@
         <h1 v-if="show2">{{ show2stats }}</h1>
       <!-- <div class="col-md-3 "> <button class="btn btn-dark w-100" type="button" style="width: auto; margin: 0.5rem;" @click="submitFunction()">Check other placess </button></div>   -->
       </div>
-      <div v-if="showwish" style="float: left; margin-left: 1em;text-align: left; margin-bottom: 1em;">
-        <a>Heyy! </a>
+      <div v-if="showwish" style="float: left; margin-left: 1em;text-align: left; margin-bottom: 1em;" >
+        <a> {{ text1 }}</a>
     <br>
-        <a>You have turned 27! As you celebrate your <b>27th birthday</b> :P , I wanted to take a moment to express how much you mean to me. Since we first met at TRI3D, you have been an important figure in my life. I remember how you were the first person I felt truly connected to in the company, and how that connection only deepened as we got to know each other better. Even though you left for Germany, our friendship never faltered and I always looked forward to catching up with you.</a>
+        <a>{{ text2 }}<b>{{ text3 }}</b>{{ text4 }}</a>
     <br>
-    <a>As I think back on our time together, I realize that you have been a constant source of support, encouragement, and positivity in my life. Your genuine nature and kind-heartedness have always been something I have admired. I'm so grateful to have you in my life and I want you to know that I will always hold a special place in my heart for you.</a>
+    <a>{{ text5 }}</a>
     <br>
-    <a>I wanted to get you a gift for your birthday but didn't know your address, so I thought of pinging any one of your friends to get the address but i found it - Frankengutstraße 16, 95447 Bayreuth (Germany). I chose to give you a violin. I thought it would be a special way for us to bond and I can't wait to see you play it. I hope it brings you as much joy as you have brought to me.
-Ideally you should have got the violin and a card with the qrcode as a surprise but its okay. </a>
+    <a>{{ text6 }}</a>
     <br>
-    <a><b>I can't wait to see you when you in 10 days, I am so excited to run and come to you. </b></a>
+    <a><b>{{ text7 }}</b></a>
     <br>
-    <a>Once again, happy birthday bosss Muuahhhhhh. I wish you all the best in the coming year and I look forward to many more memories together.</a>
+    <a>{{ text8 }}</a>
     <br>
-    <a style="color:red">Muuahhhhhh :*</a>
+    <a style="color:red">{{ text10 }}</a>
     
     
       </div>
+
+      <!-- <div v-if="showwish" style="float: left; margin-left: 1em;text-align: left; margin-bottom: 1em;" class="typing-text">
+        <span>{{ text }}</span>
+      </div> -->
     </div>
   </div>
 </template>
@@ -85,9 +88,13 @@ export default {
     // LIcon,
     // LCircle
   },
-  computed: mapGetters([
+  computed: {...mapGetters([
       'evenOrOdd','lati','long','windowData'
     ]),
+    typedText() {
+      return this.text.split("").map((char, index) => ({ char, index }));
+    }
+  },
   methods:{
     getCoord(a,b){
         return latLng(a,b)
@@ -145,7 +152,21 @@ export default {
         showstatus:true,
         show2:false,
         show2stats:'',
-        timerCount:10
+        timerCount:10,
+        text: 'Happy Birthday Bosss!!',
+        text1:"Heyy!",
+        text2:"You have turned 27! As you celebrate your ",
+        text3:"27th birthday",
+        text4:" :P , I wanted to take a moment to express how much you mean to me. Since we first met at TRI3D, you have been an important figure in my life. I remember how you were the first person I felt truly connected to in the company, and how that connection only deepened as we got to know each other better. Even though you left for Germany, our friendship never faltered and I always looked forward to catching up with you.",
+        text5:"As I think back on our time together, I realize that you have been a constant source of support, encouragement, and positivity in my life. Your genuine nature and kind-heartedness have always been something I have admired. I'm so grateful to have you in my life and I want you to know that I will always hold a special place in my heart for you.",
+        text6:"I wanted to get you a gift for your birthday but didn't know your address, so I thought of pinging any one of your friends to get the address but i found it - Frankengutstraße 16, 95447 Bayreuth (Germany). I chose to give you a violin. I can't wait to see you play it. I hope it brings you as much joy as you have brought to me.Ideally you should have got the violin and a card with the qrcode as a surprise but its okay. ",
+        text7:"I can't wait to see you in 10 days, I am so excited to run and come to you. ",
+        text8:"Once again, happy birthday bosss Muuahhhhhh. I wish you all the best in the coming year and I look forward to many more memories together.",
+        text9:"Love,",
+        text10:"Muuahhhhhh :*",
+        cnt:0,
+        dtext:{}
+
         
       };
     },
@@ -191,7 +212,7 @@ export default {
                       const time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
                       const dateTime = date +' '+ time;
                       console.log(dateTime)
-                      if (date =='2023-1-20'){
+                      if (date =='2023-1-20' ){
 
                         if (parseInt(today.getHours())  <  23){
                           let num = 24 - today.getHours() 
@@ -216,12 +237,103 @@ export default {
                             }
                           }
                         }
-                      }else if (date =='2023-1-21'){
+                      }else if (date =='2023-1-21' && !this.showwish){
                         // this.status = 'Happy Birthday Boss'
                         this.showstatus = false
                         this.showwish = true
+                        this.timerCount= 30
+                        this.dtext={'text':this.text,
+                        'text2':this.text2,
+                        'text3':this.text3,
+                        'text4':this.text4,
+                        'text5':this.text5,
+                        'text6':this.text6,
+                        'text7':this.text7,
+                        'text8':this.text8,
+                        'text9':this.text9,
+                        'text10':this.text10,
                       }
-                      // if(this.showwish){
+                        this.text = ""
+                        this.text2 = ""
+                        this.text3 = ""
+                        this.text4 = ""
+                        this.text5 = ""
+                        this.text6 = ""
+                        this.text7 = ""
+                        this.text8 = ""
+                        this.text9 = ""
+                        this.text10 = ""
+                        console.log('length',this.dtext['text2'].split(" ").length)
+                        
+                      }
+                      console.log('cnt',this.cnt,this.text.length,this.dtext['text'].length)
+                      if(this.text.length <= this.dtext['text'].length){
+                        
+                        this.text = this.text+this.dtext['text'].split(" ")[this.cnt] + " "
+                        this.cnt = this.cnt + 1
+                        if(this.text.length >= this.dtext['text'].length){
+                          this.cnt = 0
+                        }
+                      }else if(this.text2.length <= this.dtext['text2'].length){
+                        console.log(this.dtext['text2'].split(" ")[this.cnt],this.dtext['text2'].split(" "),this.cnt)
+                        this.text2 = this.text2+this.dtext['text2'].split(" ")[this.cnt] + " "
+                        this.cnt = this.cnt + 1
+                        if(this.text2.length >= this.dtext['text2'].length){
+                          this.cnt = 0
+                        }
+                      }else if(this.text3.length <= this.dtext['text3'].length){
+                        this.text3 = this.text3+this.dtext['text3'].split(" ")[this.cnt] + " "
+                        this.cnt = this.cnt + 1
+                        if(this.text3.length >= this.dtext['text3'].length){
+                          this.cnt = 0
+                        }
+                      }else if(this.text4.length <= this.dtext['text4'].length){
+                        this.text4 = this.text4+this.dtext['text4'].split(" ")[this.cnt] + " "
+                        this.cnt = this.cnt + 1
+                        if(this.text4.length >= this.dtext['text4'].length){
+                          this.cnt = 0
+                        }
+                      }else if(this.text5.length <= this.dtext['text5'].length){
+                        this.text5 = this.text5+this.dtext['text5'].split(" ")[this.cnt] + " "
+                        this.cnt = this.cnt + 1
+                        if(this.text5.length >= this.dtext['text5'].length){
+                          this.cnt = 0
+                        }
+                      }else if(this.text6.length <= this.dtext['text6'].length){
+                        this.text6 = this.text6+this.dtext['text6'].split(" ")[this.cnt] + " "
+                        this.cnt = this.cnt + 1
+                        if(this.text6.length >= this.dtext['text6'].length){
+                          this.cnt = 0
+                        }
+                      }else if(this.text7.length <= this.dtext['text7'].length){
+                        this.text7 = this.text7+this.dtext['text7'].split(" ")[this.cnt] + " "
+                        this.cnt = this.cnt + 1
+                        if(this.text7.length >= this.dtext['text7'].length){
+                          this.cnt = 0
+                        }
+                      }else if(this.text8.length <= this.dtext['text8'].length){
+                        this.text8 = this.text8+this.dtext['text8'].split(" ")[this.cnt] + " "
+                        this.cnt = this.cnt + 1
+                        if(this.text8.length >= this.dtext['text8'].length){
+                          this.cnt = 0
+                        }
+                      }else if(this.text9.length <= this.dtext['text9'].length){
+                        this.text9 = this.text9+this.dtext['text9'].split(" ")[this.cnt] + " "
+                        this.cnt = this.cnt + 1
+                        if(this.text9.length >= this.dtext['text9'].length){
+                          this.cnt = 0
+                        }
+                      }else if(this.text10.length <= this.dtext['text10'].length){
+                        this.text10 = this.text10+this.dtext['text10'].split(" ")[this.cnt] + " "
+                        this.cnt = this.cnt + 1
+                        if(this.text10.length >= this.dtext['text10'].length){
+                          this.cnt = 0
+                        }
+                      }
+
+
+                      // if(this.timerCount<20 && this.timerCount>10){
+
 
                       // }
                       // this.timestamp = dateTime;
@@ -229,7 +341,7 @@ export default {
                         setTimeout(() => {
                             this.timerCount--;
                             this.curdate = dateTime;
-                        }, 1000);
+                        }, 500);
                     // }
 
                 },
@@ -269,5 +381,12 @@ export default {
     text-overflow: ellipsis;
     background-color: white
 }
+
+
+
+
+
+
+
 
 </style>
