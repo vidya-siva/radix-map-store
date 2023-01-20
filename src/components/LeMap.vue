@@ -33,19 +33,29 @@
 
       </l-map>
     </div>
-    <div v-else>
+    <div v-else  id="home">
       <div class="row d-flex justify-content-center">
         <h1 v-if="showwish">{{ wish }}</h1>
         <h1 v-if="showstatus">{{ status }}</h1>
         <h1 v-if="show2">{{ show2stats }}</h1>
       <!-- <div class="col-md-3 "> <button class="btn btn-dark w-100" type="button" style="width: auto; margin: 0.5rem;" @click="submitFunction()">Check other placess </button></div>   -->
       </div>
-      <div v-if="showwish" >
-        <a >Hey bossss! </a>
+      <div v-if="showwish" style="float: left; margin-left: 1em;text-align: left; margin-bottom: 1em;">
+        <a>Heyy! </a>
     <br>
-    <a >You have turned 27! </a>
+        <a>You have turned 27! As you celebrate your <b>27th birthday</b> :P , I wanted to take a moment to express how much you mean to me. Since we first met at TRI3D, you have been an important figure in my life. I remember how you were the first person I felt truly connected to in the company, and how that connection only deepened as we got to know each other better. Even though you left for Germany, our friendship never faltered and I always looked forward to catching up with you.</a>
     <br>
-    <a>En life la you are veryy important, You are such a sweet and an adodarable person anyone would ask for. such a genuine soul </a>
+    <a>As I think back on our time together, I realize that you have been a constant source of support, encouragement, and positivity in my life. Your genuine nature and kind-heartedness have always been something I have admired. I'm so grateful to have you in my life and I want you to know that I will always hold a special place in my heart for you.</a>
+    <br>
+    <a>I wanted to get you a gift for your birthday but didn't know your address, so I thought of pinging any one of your friends to get the address but i found it - Frankengutstraße 16, 95447 Bayreuth (Germany). I chose to give you a violin. I thought it would be a special way for us to bond and I can't wait to see you play it. I hope it brings you as much joy as you have brought to me.
+Ideally you should have got the violin and a card with the qrcode as a surprise but its okay. </a>
+    <br>
+    <a><b>I can't wait to see you when you in 10 days, I am so excited to run and come to you. </b></a>
+    <br>
+    <a>Once again, happy birthday bosss Muuahhhhhh. I wish you all the best in the coming year and I look forward to many more memories together.</a>
+    <br>
+    <a style="color:red">Muuahhhhhh :*</a>
+    
     
       </div>
     </div>
@@ -130,7 +140,7 @@ export default {
           radius:1
         },
         status:'hello',
-        wish:'Happy Birthday Bosssssss',
+        wish:'Happy Birthday Bosss!!',
         showwish:false,
         showstatus:true,
         show2:false,
@@ -139,37 +149,37 @@ export default {
       };
     },
     watch: {
-      lati : {handler : function()  {
-        this.center = latLng(this.$store.state.Lat,this.$store.state.Lon)
-        this.circle.center = this.center
-        this.coordArray = [{id:1,lat:this.$store.state.Lat,long:this.$store.state.Lon ,name:'Eskişehir'}]
-        // if(!this.coordArray.includes){
-        //   this.coordArray.push(curCoord)
-        // }
-        this.$forceUpdate()
-        this.map = this.$refs.myMap.mapObject
-        if(this.$store.state.count == 0){
-          this.mainfunc()
-        }
+    //   lati : {handler : function()  {
+    //     this.center = latLng(this.$store.state.Lat,this.$store.state.Lon)
+    //     this.circle.center = this.center
+    //     this.coordArray = [{id:1,lat:this.$store.state.Lat,long:this.$store.state.Lon ,name:'Eskişehir'}]
+    //     // if(!this.coordArray.includes){
+    //     //   this.coordArray.push(curCoord)
+    //     // }
+    //     this.$forceUpdate()
+    //     this.map = this.$refs.myMap.mapObject
+    //     if(this.$store.state.count == 0){
+    //       this.mainfunc()
+    //     }
         
 
         
-        this.map.invalidateSize(false)
-        this.$store.state.count = 4
-        // $('div.geosearch.leaflet-bar.leaflet-control.leaflet-control-geosearch.leaflet-geosearch-bar').style.display='none'
-		}},
-    windowData : {handler : function()  {
-        this.center = latLng(this.$store.state.Lat,this.$store.state.Lon)
-        this.circle.center = this.center
-        this.coordArray = [{id:1,lat:this.$store.state.Lat,long:this.$store.state.Lon ,name:'Eskişehir'}]
-        // if(!this.coordArray.includes){
-        //   this.coordArray.push(curCoord)
-        // }
-        this.$forceUpdate()
-        this.map = this.$refs.myMap.mapObject
-        this.map.invalidateSize(false)
-        // this.$store.state.count = this.coordArray.length
-		}},
+    //     this.map.invalidateSize(false)
+    //     this.$store.state.count = 4
+    //     // $('div.geosearch.leaflet-bar.leaflet-control.leaflet-control-geosearch.leaflet-geosearch-bar').style.display='none'
+		// }},
+    // windowData : {handler : function()  {
+    //     this.center = latLng(this.$store.state.Lat,this.$store.state.Lon)
+    //     this.circle.center = this.center
+    //     this.coordArray = [{id:1,lat:this.$store.state.Lat,long:this.$store.state.Lon ,name:'Eskişehir'}]
+    //     // if(!this.coordArray.includes){
+    //     //   this.coordArray.push(curCoord)
+    //     // }
+    //     this.$forceUpdate()
+    //     this.map = this.$refs.myMap.mapObject
+    //     this.map.invalidateSize(false)
+    //     // this.$store.state.count = this.coordArray.length
+		// }},
     timerCount: {
                 handler(value) {
                     console.log(value)
@@ -190,7 +200,7 @@ export default {
                           if (parseInt(today.getMinutes()) < 60){
 
                             let min = 60 - today.getMinutes() 
-                            this.status = 'Wait for '+ min.toString()+ 'minutes to go'
+                            this.status = 'Now its '+ min.toString()+ 'minutes to go'
                             this.timerCount = parseInt()
                           }else{
                             let sec = 60 - today.getSeconds()
@@ -231,7 +241,7 @@ export default {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
+  /* text-align: center; */
   color: #2c3e50;
   margin-top: 60px;
 }
@@ -254,6 +264,5 @@ export default {
     text-overflow: ellipsis;
     background-color: white
 }
-
 
 </style>
