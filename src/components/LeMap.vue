@@ -3,7 +3,7 @@
 
 <template>
   <div id="app">
-    <div style="height: 1000px; width: 100%">
+    <div v-if="showthis" style="height: 1000px; width: 100%">
       
       <l-map
           @click="onCustomClick"
@@ -14,13 +14,11 @@
           style="height: 100%"
           ref="myMap" 
       >
-        <!-- <l-circle  :lat-lng="circle.center" fillColor="black" :fillOpacity="0.7" color="red" :radius="10"/> -->
         <l-tile-layer
             :url="url"
             :attribution="attribution"
         />
         <l-marker  :draggable="false" @update:latLng="onDrag"  @click="onLogMarker(item)" :lat-lng="getCoord(item.lat,item.long)" v-for="item in coordArray" :key="item.id">
-          <!-- <l-icon :icon-url="icon" :icon-size="iconSize" /> -->
           <l-popup>
             Location Name : {{ $store.state.locN }}
             <br>
@@ -34,6 +32,14 @@
         </l-marker>
 
       </l-map>
+    </div>
+    <div v-else>
+      <div class="row d-flex justify-content-center">
+        <h1 v-if="showwish">{{ wish }}</h1>
+        <h1 v-if="showstatus">{{ status }}</h1>
+        <h1 v-if="show2">{{ show2stats }}</h1>
+      <!-- <div class="col-md-3 "> <button class="btn btn-dark w-100" type="button" style="width: auto; margin: 0.5rem;" @click="submitFunction()">Check other placess </button></div>   -->
+      </div>
     </div>
   </div>
 </template>
@@ -109,12 +115,18 @@ export default {
         url: 'https://tile.thunderforest.com/cycle/{z}/{x}/{y}.png?apikey=b90e089c365242a3a08dbb49a7084a61',
         attribution: 'Haritamız',
         coordArray:[{}],
-        
+        showthis:false,
         iconSize:[40,40],
         circle:{
           center: latLng(this.$store.state.Lat,this.$store.state.Lon),
           radius:1
-        }
+        },
+        status:'hello',
+        wish:'Happy Birthday Bosssssss',
+        showwish:false,
+        showstatus:true,
+        show2:false,
+        show2stats:''
         
       };
     },
@@ -149,7 +161,57 @@ export default {
         this.map = this.$refs.myMap.mapObject
         this.map.invalidateSize(false)
         // this.$store.state.count = this.coordArray.length
-		}}
+		}},
+    timerCount: {
+                handler(value) {
+                    console.log(value)
+                    console.log(this.curdate)
+                    // if (value > 0) {
+                      const today = new Date();
+                      const date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+                      const time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+                      const dateTime = date +' '+ time;
+                      console.log(dateTime)
+                      if (date =='2023-1-20'){
+
+                        if (parseInt(today.getHours())  <  23){
+                          let num = 23 - today.getHours() 
+                          this.status =  num.toString()+ ' more hours to go' 
+                        }
+                        else if (parseInt(today.getHours())  ==  '23'){
+                          if (parseInt(today.getMinutes()) < 59){
+
+                            let min = 60 - today.getMinutes() 
+                            this.status = 'Wait for '+ min.toString()+ 'minutes to go'
+                            this.timerCount = parseInt()
+                          }else{
+                            let sec = 60 - today.getSeconds()
+                            if (sec > 6){
+                              this.status = 'Countdown '+ sec.toString()+ 'seconds to go'
+                            }else if(sec > 3 ){
+                              this.status = sec.toString()
+                              this.show2stats = 'And here it goes ..'
+                              this.show2 = true
+                            }else{
+                              this.showwish = true
+                            }
+                          }
+                        }
+                      }
+                      // if(this.showwish){
+
+                      // }
+                      // this.timestamp = dateTime;
+
+                        setTimeout(() => {
+                            this.timerCount--;
+                            this.curdate = dateTime;
+                        }, 1000);
+                    // }
+
+                },
+                immediate: true // This ensures the watcher is triggered upon creation
+      },
 
 		
 	}

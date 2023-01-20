@@ -9,12 +9,12 @@
     <div v-show="windowData">
       <div class="row d-flex justify-content-center">
       
-      <div class="col-md-3 "> <button class="btn btn-dark w-100" type="button" style="width: auto; margin: 0.5rem;" @click="submitFunction()">Check other placess </button></div>  
+      <!-- <div class="col-md-3 "> <button class="btn btn-dark w-100" type="button" style="width: auto; margin: 0.5rem;" @click="submitFunction()">Check other placess </button></div>   -->
       </div>
       <LeMap /> 
     
     </div>
-    <footer> {{this.$store.state.version}} </footer>
+    <!-- <footer> {{this.$store.state.version}} </footer> -->
   </div>
 </template>
 

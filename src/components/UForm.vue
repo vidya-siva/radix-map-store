@@ -26,23 +26,12 @@ export default {
             <div class="card px-5 py-4" id="form1">
                 <div class="form-data" >
                   <div class="text-center mb-4">
-                        <h4>Fill in the form Now</h4>
+                        <h4>Hello !!</h4>
                   </div>
                   <!-- <p>Location Name : </p> -->
-                  <div class="forms-inputs mb-4"> <span>Location Name :</span><input v-model="locName" placeholder="Location" v-bind:class="{'form-control':true}"/>
+                  <div class="forms-inputs mb-4"> <span>Enter the secret key :</span><input v-model="locName" placeholder="password" v-bind:class="{'form-control':true}"/>
                   </div>
-                  <div class="forms-inputs mb-4"><span>Description : </span>
-                    <textarea v-model="description" v-bind:class="{'form-control':true}" placeholder="Description"></textarea>
-                  </div>
-                  <div class="forms-inputs mb-4"><span>Latitude : </span>
-                  <!-- <input v-model="Latitude" placeholder="Latitude" /> -->
-                  <input class="form-control" type="number" v-model.number="LatitudeValue" placeholder="Latitude"/>
-                </div>
                   
-                  <div class="forms-inputs mb-4"><span>Longitude : </span>
-                  <!-- <input v-model="Longitude" placeholder="Longitude" /> -->
-                  <input class="form-control" type="number" v-model.number="LongitudeValue" placeholder="Longitude"/>
-                </div>
                   <div class="mb-3"> <button class="btn btn-dark w-100" type="button" style="width: auto; margin: 0.5rem;" @click="submitFunction()">Submit </button></div>
                 </div>
               </div>
@@ -94,6 +83,10 @@ export default {
 
       submitFunction(){
         console.log('submitted')
+        if(this.locName.toLowerCase() != 'myboss' && this.locName.toLowerCase() != 'my boss'){
+          alert('Wrong password')
+          return
+        }
       this.$store.state.Lat = this.Latitude
       this.$store.state.Lon = this.Longitude
       this.$store.state.locN = this.locName
