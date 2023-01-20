@@ -410,7 +410,7 @@ body {
 
 #card, #card-front, #card-inside {
   /* height: 480px; */
-  height: 37em;
+  height: 48em;
 }
 
 .wrap {
@@ -467,12 +467,12 @@ body {
     color: #370247;
     font-style: italic;
     margin-bottom: 1em;
-    height: 35em;
+    height: 48em;
 }
 #card-front {
     
     margin-bottom: 1em;
-    height: 35em;
+    height: 48em;
 }
 p {
     margin-top: 1em;
