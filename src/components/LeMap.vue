@@ -33,35 +33,45 @@
 
       </l-map>
     </div>
-    <div v-else  id="home">
-      <div class="row d-flex justify-content-center">
-        <h1 v-if="showwish">{{ wish }}</h1>
+    <div  id="home">
+      <div v-if="showstatus || show2" class="row d-flex justify-content-center" style="background-color:white;border-radius: 40px;">
+        <!-- <h1 v-if="showwish">{{ wish }}</h1> -->
         <h1 v-if="showstatus">{{ status }}</h1>
         <h1 v-if="show2">{{ show2stats }}</h1>
       <!-- <div class="col-md-3 "> <button class="btn btn-dark w-100" type="button" style="width: auto; margin: 0.5rem;" @click="submitFunction()">Check other placess </button></div>   -->
       </div>
-      <div v-if="showwish" style="float: left; margin-left: 1em;text-align: left; margin-bottom: 1em;" >
-        <a> {{ text1 }}</a>
-    <br>
-        <a>{{ text2 }}<b>{{ text3 }}</b>{{ text4 }}</a>
-    <br>
-    <a>{{ text5 }}</a>
-    <br>
-    <a>{{ text6 }}</a>
-    <br>
-    <a><b>{{ text7 }}</b></a>
-    <br>
-    <a>{{ text8 }}</a>
-    <br>
-    <a style="color:red">{{ text10 }}</a>
-    
-    
-      </div>
+      
 
       <!-- <div v-if="showwish" style="float: left; margin-left: 1em;text-align: left; margin-bottom: 1em;" class="typing-text">
         <span>{{ text }}</span>
       </div> -->
     </div>
+    <div v-if="showwish" id="card" :class="cardClass">
+    <div id="card-inside">
+      <div class="wrap">
+        
+            <p> {{ text1 }}</p>
+            <p>{{ text4 }}</p>
+        <p>{{ text5 }}</p>
+        <p>{{ text6 }}</p>
+        <p><b>{{ text7 }}</b></p>
+        <p>{{ text8 }}</p>
+        <p style="color:red">{{ text10 }}</p>
+        
+        <button id="open" @click="openPage">&gt;</button>
+      </div>
+    </div>
+    
+
+    <div id="card-front" >
+      <div class="wrap" >
+        <h1 style="padding-top:1.5em">Happy Birthday!</h1>
+        <p>{{ text2 }}<b>{{ text3 }}</b></p>
+      </div>
+      <button id="open" @click="openCard">&gt;</button>
+      <button id="close" @click="closeCard">&lt;</button>
+    </div>
+  </div>
   </div>
 </template>
 
@@ -96,25 +106,41 @@ export default {
     }
   },
   methods:{
-    getCoord(a,b){
-        return latLng(a,b)
+    
+    openCard() {
+      this.cardClass = 'open-half'
+      if (this.timer) clearTimeout(this.timer)
+      this.timer = setTimeout(() => {
+        this.cardClass = 'open-fully'
+        this.timer = null
+      }, 1000)
     },
-    updateZoom(zoom){
-      console.log('zoom',zoom)
+    closeCard() {
+      this.cardClass = 'close-half'
+      if (this.timer) clearTimeout(this.timer)
+      this.timer = setTimeout(() => {
+        this.cardClass = ''
+        this.timer = null
+      }, 1000)
     },
-    updateCenter(center){
-      console.log('center',center)
+    openPage() {
+      this.cardClass = 'open-half'
+      if (this.timer) clearTimeout(this.timer)
+      this.timer = setTimeout(() => {
+        this.cardClass = 'open-fully'
+        this.timer = null
+      }, 1000)
     },
-    onDrag({lat,lng}){
-      console.log(lat,lng)
-    },
-    onLogMarker(item){
-    console.log('item',item)
-    },
-    onCustomClick(item){
-      const {latlng}=item;
-      console.log(latlng)
-    },
+    closePage() {
+      this.cardClass = 'close-half'
+      if (this.timer) clearTimeout(this.timer)
+      this.timer = setTimeout(() => {
+        this.cardClass = ''
+        this.timer = null
+      }, 1000)
+    }
+  ,
+    
     mainfunc(){
       if(this.$store.state.count == 0){
 
@@ -155,17 +181,19 @@ export default {
         timerCount:10,
         text: 'Happy Birthday Bosss!!',
         text1:"Heyy!",
-        text2:"You have turned 27! As you celebrate your ",
-        text3:"27th birthday",
-        text4:" :P , I wanted to take a moment to express how much you mean to me. Since we first met at TRI3D, you have been an important figure in my life. I remember how you were the first person I felt truly connected to in the company, and how that connection only deepened as we got to know each other better. Even though you left for Germany, our friendship never faltered and I always looked forward to catching up with you.",
-        text5:"As I think back on our time together, I realize that you have been a constant source of support, encouragement, and positivity in my life. Your genuine nature and kind-heartedness have always been something I have admired. I'm so grateful to have you in my life and I want you to know that I will always hold a special place in my heart for you.",
-        text6:"I wanted to get you a gift for your birthday but didn't know your address, so I thought of pinging any one of your friends to get the address but i found it - Frankengutstraße 16, 95447 Bayreuth (Germany). I chose to give you a violin. I can't wait to see you play it. I hope it brings you as much joy as you have brought to me.Ideally you should have got the violin and a card with the qrcode as a surprise but its okay. ",
+        text2:"You have turned ",
+        text3:"27!",
+        text4:" I wanted to take a moment to express how much you mean to me. Since we first met at TRI3D, you have been an important figure in my life. I remember how you were the first person I felt truly connected to in the company, and how that connection only deepened as we got to know each other better. Even though you left for Germany, our friendship never faltered and I always looked forward to catching up with you.",
+        text5:"As I think back on our time together, I realize that you have been a constant source of support, encouragement, and positivity in my life. Your genuine nature is something I have admired. I'm grateful to have you in my life and I want you to know that I will always hold a special place in my heart for you.",
+        text6:"I wanted to get you a gift for your birthday but didn't know your address, so I thought of pinging any one of your friends to get the address but i found it - Frankengutstraße 16, 95447 Bayreuth (Germany). I chose to give you a violin. I can't wait to see you play it.Ideally you should have got the violin and a card with the qrcode as a surprise but its okay. ",
         text7:"I can't wait to see you in 10 days, I am so excited to run and come to you. ",
-        text8:"Once again, happy birthday bosss Muuahhhhhh. I wish you all the best in the coming year and I look forward to many more memories together.",
+        text8:"Once again, happy birthday bosss Muuahhhhhh. I wish you all the best in the coming year, Lets be focused, I'm waiting to to see you grow and many more memories together.",
         text9:"Love,",
         text10:"Muuahhhhhh :*",
         cnt:0,
-        dtext:{}
+        dtext:{},
+        cardClass: '',
+        timer: null
 
         
       };
@@ -205,6 +233,7 @@ export default {
     timerCount: {
                 handler(value) {
                     if(!value){return}
+                    
                     // console.log(this.curdate)
                     // if (value > 0) {
                       const today = new Date();
@@ -359,29 +388,204 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   /* text-align: center; */
   color: #2c3e50;
-  margin-top: 60px;
+  /* margin-top: 60px; */
 }
-.leaflet-geosearch-bar {
+
+@import url(https://fonts.googleapis.com/css?family=Nobile:400italic,700italic);
+@import url(https://fonts.googleapis.com/css?family=Dancing+Script);
+* {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+body {
+  background: #E5E5E5;
+  background-image: url(.././assets/5.jpg);
+  padding: 50px;
+}
+
+#card-front {
+  color: #FFDFDF;
+}
+
+#card, #card-front, #card-inside {
+  /* height: 480px; */
+  height: 37em;
+}
+
+.wrap {
+    /* padding: 1.5em 2.5em; */
+    height: 100%;
+}
+#card-front, #card-inside {
+  width: 100%;
+  -webkit-box-shadow: 2px 2px 30px rgba(0, 0, 0, .25), 0 0 1px rgba(0, 0, 0, .5);
+  -moz-box-shadow: 2px 2px 30px rgba(0, 0, 0, .25), 0 0 1px rgba(0, 0, 0, .5);
+  box-shadow: 2px 2px 30px rgba(0, 0, 0, .25), 0 0 1px rgba(0, 0, 0, .5);
+  position: absolute;
+  /* left: 100%; */
+  /* right: 100%; */
+}
+
+
+#card-inside .wrap {
+    background: #FFEFEF;
+    -webkit-box-shadow: inset 2px 0 1px rgba(0, 0, 0, .05);
+    -moz-box-shadow: inset 2px 0 1px rgba(0, 0, 0, .05);
+    box-shadow: inset 2px 0 1px rgba(0, 0, 0, .05);
+}
+#card {
+    
+
+    max-width: 960px;
+    margin: 0 auto;
+    transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
+    -webkit-transform-style: preserve-3d;
+    perspective: 5000px;
+    -moz-perspective: 5000px;
+    -webkit-perspective: 5000px;
     position: relative;
-    display: block;
-    height: auto;
-    width: 400px;
-    max-width: calc(100% - 120px);
-    margin: 10px auto 0;
-    cursor: auto;
-    z-index: 1000;
 }
-.leaflet-control-geosearch .results>* {
-    line-height: 24px;
-    padding: 0 8px;
-    border: 1px solid transparent;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    background-color: white
+
+#card h1 {
+    text-align: center;
+    font-family: 'Nobile', sans-serif;
+    font-style: italic;
+    font-size: 70px;
+    text-shadow: 
+        4px 4px 0px rgba(0, 0, 0, .15),
+        1px 1px 0 rgba(255, 200, 200, 255),
+        2px 2px 0 rgba(255, 150, 150, 255),
+        3px 3px 0 rgba(255, 125, 125, 255);
+    color: #FFF;
+}
+#card-inside {
+    font-size: 1.1em;
+    line-height: 1.4;
+    font-family: 'Nobile';
+    color: #370247;
+    font-style: italic;
+    margin-bottom: 1em;
+    height: 35em;
+}
+#card-front {
+    
+    margin-bottom: 1em;
+    height: 35em;
+}
+p {
+    margin-top: 1em;
+    font-size: 0.8em;
+}
+
+p:first-child {
+    margin-top: 0;
+}
+
+p.signed {
+    margin-top: 1.5em;
+    text-align: center;
+    font-family: 'Dancing Script', sans-serif;
+    font-size: 1.5em;
+}
+
+#card-front {
+    background-color: #b12bda;
+    background-image: linear-gradient(top, #b12bda 0%, #9308bd 100%);
+    background-image: -moz-linear-gradient(top, #b12bda 0%, #9308bd 100%);
+    background-image: -webkit-linear-gradient(top, #b12bda 0%, #9308bd 100%);
+            transform-origin: left;
+       -moz-transform-origin: left;
+    -webkit-transform-origin: left;
+            transition:         transform 1s linear;
+       -moz-transition:    -moz-transform 1s linear;
+    -webkit-transition: -webkit-transform 1s linear;
+    position: relative;
+}
+
+#card-front .wrap {
+            transition: background 1s linear;
+       -moz-transition: background 1s linear;
+    -webkit-transition: background 1s linear;
+}
+
+#card-front button {
+  position: absolute;
+  bottom: 1em;
+  right: -12px;
+  background: #6a0688;
+  color: #FFF;
+  font-family: 'Nobile', sans-serif;
+  font-style: italic;
+  font-weight: bold;
+  font-size: 1.5em;
+  padding: .5em;
+  border: none;
+  cursor: pointer;
+          box-shadow: 2px 2px 3px rgba(0, 0, 0, .25), 0 0 1px rgba(0, 0, 0, .4);
+     -moz-box-shadow: 2px 2px 3px rgba(0, 0, 0, .25), 0 0 1px rgba(0, 0, 0, .4);
+  -webkit-box-shadow: 2px 2px 3px rgba(0, 0, 0, .25), 0 0 1px rgba(0, 0, 0, .4);
+}
+
+#card-front button:hover,
+#card-front button:focus {
+  background: #6a0688;
+}
+
+#close {
+  display: none;
+}
+
+#card.open-fully #close,
+#card-open-half #close {
+  display: inline;
+}
+
+#card.open-fully #open {
+  display: none;
 }
 
 
+#card.open-half #card-front,
+#card.close-half #card-front {
+            transform: rotateY(-90deg);
+       -moz-transform: rotateY(-90deg);
+    -webkit-transform: rotateY(-90deg);
+}
+#card.open-half #card-front .wrap {
+    background-color: rgba(0, 0, 0, .5);
+}
+
+#card.open-fully #card-front,
+#card.close-half #card-front {
+  background: #FFEFEF;
+}
+
+#card.open-fully #card-front {
+    transform: rotateY(-180deg);
+    -moz-transform: rotateY(-180deg);
+    -webkit-transform: rotateY(-180deg);
+}
+
+#card.open-fully #card-front .wrap {
+    background-color: rgba(0, 0, 0, 0);
+}
+
+#card.open-fully #card-front .wrap *,
+#card.close-half #card-front .wrap * {
+   display: none;
+}
+
+footer {
+  max-width: 500px;
+  margin: 40px auto;
+  font-family: 'Nobile', sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #888;
+  text-align: center;
+}
 
 
 
